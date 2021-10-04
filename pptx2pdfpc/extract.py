@@ -32,7 +32,7 @@ def text_boxes(input_pptx: pathlib.Path) -> List[Tuple[int, List[Any]]]:
     return extracted
 
 
-def generate_pdfpc(extracted_notes: List[Tuple[int, str]], output_path: pathlib.Path):
+def generate_pdfpc(extracted_notes: List[Tuple[int, str]], output_path: pathlib.Path, font_size: str=None):
     """Generate a config file for pdfpc and writes it to output_path.
     The file ending is .pdfpc and can be used together with a PDF
     version of the pptx presentation.
@@ -42,8 +42,12 @@ def generate_pdfpc(extracted_notes: List[Tuple[int, str]], output_path: pathlib.
     Requirement: Both files need to have the same name, one ending in .pdf, the other in .pdfpc.
     For pdfpc, see its man page or https://man.archlinux.org/man/community/pdfpc/pdfpc.1.en
     """
+
     DELIMITER = "###"
     with output_path.open("a") as fo:
+        if font_size:
+            fo.write("[font_size]\n")
+            fo.write(f"{font_size}\n")
         fo.write("[notes]\n")
         for slide in extracted_notes:
             page_number = slide[0]
