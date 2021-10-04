@@ -5,6 +5,9 @@ description = "Extracts speaker notes from a pptx and transforms it into a .pdfp
 authors = ["bytinbit <meline.sieber@ost.ch>"]
 license = "AGPL v3.0"
 
+[tool.poetry.scripts]
+pptx2pdfpc = "pptx2pdfpc.cli:main"
+
 [tool.poetry.dependencies]
 python = "^3.8"
 python-pptx = "^0.6.21"
