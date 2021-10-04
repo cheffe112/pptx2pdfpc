@@ -8,4 +8,4 @@ A solution for Linux: Create your PowerPoint presentation in your VM of choice, 
 This tool automates the process: Give it your pptx-file and it extracts all speaker notes, generating the required pdfpc-file. You still need to export the pptx file as pdf by hand.
 
 # Thanks
-The tool uses the library [python-pptx](https://python-pptx.readthedocs.io/). I did not immediately find the library's functions to extract the speaker notes, and a search guided me to user [fusion's answer on StackOverflow](https://stackoverflow.com/questions/63659972/extract-presenter-notes-from-pptx-file-powerpoint). My tool extracts the speaker notes based on their SO answer, and I am indepted to and grateful for their solution. Thanks!
+The tool uses the library [python-pptx](https://python-pptx.readthedocs.io/). I did not immediately find the library's functions to extract the speaker notes, and a search guided me to user [fusion's answer on StackOverflow](https://stackoverflow.com/questions/63659972/extract-presenter-notes-from-pptx-file-powerpoint). My tool extracts the speaker notes based on their SO answer, and I am indebted to and grateful for their solution. Thanks!
