@@ -13,7 +13,7 @@ def speaker_notes(input_pptx: pathlib.Path) -> List[Tuple[int, str]]:
     """Extract all speaker notes from a pptx."""
     prs = Presentation(str(input_pptx))
     extracted = []
-    for page, slide in enumerate(prs.slides):
+    for page, slide in enumerate(prs.slides, start=1):
         text = slide.notes_slide.notes_text_frame.text
         extracted.append((page, text))
     return extracted
@@ -23,7 +23,7 @@ def text_boxes(input_pptx: pathlib.Path) -> List[Tuple[int, List[Any]]]:
     """Extract all text boxes from all slides."""
     prs = Presentation(str(input_pptx))
     extracted = []
-    for page, slide in enumerate(prs.slides):
+    for page, slide in enumerate(prs.slides, start=1):
         temp = []
         for shape in slide.shapes:
             if shape.has_text_frame and shape.text.strip():
