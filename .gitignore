@@ -1,6 +1,7 @@
 .venv
 .idea
-.pdf
-.pdfpc
+*.pdf
+*.pdfpc
+*.pptx
 **/__pycache__/
 pptx2pdfpc/__pycache__/
