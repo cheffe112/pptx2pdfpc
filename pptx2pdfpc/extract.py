@@ -1,3 +1,4 @@
+import json
 import pathlib
 from typing import Tuple, List, Any
 
@@ -37,7 +38,8 @@ def text_boxes(input_pptx: pathlib.Path) -> List[Tuple[int, List[Any]]]:
     return extracted
 
 
-def generate_pdfpc(extracted_notes: List[Tuple[int, str]], options: List[Tuple[str, Any]], output_path: pathlib.Path, font_size: str=None):
+def generate_pdfpc(extracted_notes: List[Tuple[int, str]], options: List[Tuple[str, Any]], output_path: pathlib.Path,
+                   font_size: str = None):
     """Generate a config file for pdfpc and writes it to output_path.
     The file ending is .pdfpc and can be used together with a PDF
     version of the pptx presentation.
@@ -50,16 +52,22 @@ def generate_pdfpc(extracted_notes: List[Tuple[int, str]], options: List[Tuple[s
     options_to_write = _create_options(options)
 
     DELIMITER = "###"
-    with output_path.open("a") as fo:
-        fo.writelines(options_to_write)
-        fo.write("[notes]\n")
+    with output_path.open("w") as fo:
+        # fo.writelines(options_to_write)
+        pages = []
+        idx = 0
         for slide in extracted_notes:
+            page = {'idx': idx, "label": str(idx + 1), "overlay": 0}
+            idx = idx + 1
             page_number = slide[0]
             note_text = slide[1]
             if len(note_text) > 0:
-                fo.write(f"{DELIMITER} {page_number}\n")
-                fo.write(f"{note_text}\n")
-                fo.write("\n")
+                print(note_text)
+                page["note"] = note_text
+            pages.append(page)
+
+        dataset = {"pdfpcFormat": 1, "disableMarkdown": True, "noteFontSize": 20, "pages": pages}
+        json.dump(dataset, fo, indent=6)
 
 
 def generate_output_path(input_path: pathlib.Path) -> pathlib.Path:
