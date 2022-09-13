@@ -51,7 +51,6 @@ def generate_pdfpc(extracted_notes: List[Tuple[int, str]], options: List[Tuple[s
     """
     options_to_write = _create_options(options)
 
-    DELIMITER = "###"
     with output_path.open("w") as fo:
         # fo.writelines(options_to_write)
         pages = []
@@ -62,7 +61,6 @@ def generate_pdfpc(extracted_notes: List[Tuple[int, str]], options: List[Tuple[s
             page_number = slide[0]
             note_text = slide[1]
             if len(note_text) > 0:
-                print(note_text)
                 page["note"] = note_text
             pages.append(page)
 
